@@ -33,11 +33,35 @@ class Componente:
     def __str__(self):
         return f"{self.nombre}({self.version}) - {self.fecha_creacion}"
 
+class Sistema:
+    def __init__(self, nombre:str) -> None:
+        self.__nombre = nombre
+        self.__componentes = []
+
+    def anyadir_componente(self, componente: Componente) -> None:
+        self.__componentes.append(componente)
+
+    def obtener_componente(self) -> list:
+        return self.__componentes
+
+    def __str__(self) -> str:
+
+        textlist = ""
+        for componente in self.__componentes:
+            textlist += f"\n  - {componente}"
+
+        return f"{self.__nombre} {textlist}"
+
+
 if __name__ == "__main__":
     componentes  = [
         Componente("RAM", 1.0, datetime( 2019, 4, 12, 15, 36)),
         Componente("SSD", 3.14, datetime( 2023, 1, 3, 12, 48))
     ]
 
+    sist = Sistema("Principal")
+
     for componente in componentes:
-        print(componente)
+        sist.anyadir_componente(componente)
+
+    print(sist)
